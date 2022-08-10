@@ -3,7 +3,7 @@ import React from "react";
 function Footer(){
     return (
     <span className="Footer">
-    <i class="fa fa-copyright">Made By Srashti Deshmukh</i>
+    <i className="fa fa-copyright" data-testid="footer">Made By Srashti Deshmukh</i>
     </span>
     );
 }

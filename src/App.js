@@ -1,11 +1,10 @@
 import './App.css';
 import React, { useState } from "react";
-import Header from './Components/Header.js';
-import Form from './Components/InputForm.js';
-import Filters from './Components/Filters.js';
-import TaskList from './Components/TaskTemplate.js';
-import {nanoid} from "nanoid";
-import Footer from './Components/Footer.js';
+import Header from './Components/Header/Header.js';
+import Form from './Components/InputForm/InputForm.js';
+import Filters from './Components/Filter/Filters.js';
+import TaskList from './Components/TodoItem/TodoItem.js';
+import Footer from './Components/Footer/Footer.js';
 
 function App(props) {
 
@@ -20,7 +19,7 @@ function App(props) {
   const FILTER_NAMES = Object.keys(FILTER_MAP);
 
   const filterList = FILTER_NAMES.map((name) => (
-    <Filters key={name} name={name} isPressed={name===filter} setFilter={setFilter}/>
+    <Filters data-testid="filters" className="filters" key={name} name={name} isPressed={name===filter} setFilter={setFilter}/>
   ));
 
   const[tasks,setTask]=useState(props.tasks)
@@ -35,7 +34,8 @@ function App(props) {
     setTask(updatedTasks);
   }
 
-  const taskList = tasks.filter(FILTER_MAP[filter])
+  const arr=tasks||[];
+  const taskList = arr.filter(FILTER_MAP[filter])
   .map((task) => (
     <TaskList name={task.name} id={task.id} key={task.id}
      deleteTask={deleteTask} 
@@ -43,10 +43,16 @@ function App(props) {
      toggleTaskCompletion={toggleTaskCompletion}/>
   ));
 
-
+// let lastIndex=tasks.length>0?tasks.length:0;
   function addTask(name) {
-    const newTask={id:"todo-"+nanoid(), name:name, completed:false};
+    // let lastIndex=tasks.length||0;
+    let lastIndex=Math.random()*1000;
+    if(name.trim()==='')
+    alert("Task cannot be empty!");
+    else{
+    let newTask={id:lastIndex+1, name:name, completed:false};
     setTask([...tasks,newTask]);
+    }
   }
 
   function deleteTask(id) {
@@ -55,11 +61,11 @@ function App(props) {
   }
 
   return (
-    <div className="App">
+    <div className="App" data-testid="App">
       <Header className="head"/>
       <Form className="form" addTask={addTask}/>
       {filterList}
-      <ul className="todo-list" aria-labelledby="list-heading">
+      <ul className="todo-list"  data-testid="todo-list" aria-labelledby="list-heading">
         {taskList}
       </ul>
       <Footer/>
