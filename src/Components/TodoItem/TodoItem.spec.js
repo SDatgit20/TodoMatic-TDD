@@ -32,3 +32,19 @@ describe("Testing the ui",()=>{
     })
 
 })
+
+test("Strike the todo when tick button is clicked", () => {
+    const markDone = jest.fn();
+    render(<TaskList name="Water plants" id="10" completed="false" toggleTaskCompletion={markDone} />);
+    const checkElement = screen.getByTestId("todo-done");
+    fireEvent.click(checkElement);
+    expect(markDone).toBeCalled();
+  });
+  
+  test("delete todo when delete button clicked", () => {
+    const deleteTodo = jest.fn();
+    render(<TaskList name="Water plants" id="10" completed="false" deleteTask={deleteTodo} />);
+    const deleteElement = screen.getByTestId("todo-del");
+    fireEvent.click(deleteElement);
+    expect(deleteTodo).toBeCalled();
+  });

@@ -25,7 +25,29 @@ describe("Testing the ui",()=>{
         
         expect(inputField).toHaveAttribute("value","Water plants");
     })
-
 })
+describe("Testing the functionality",()=>{
+    it("Should submit the input",()=>{
+        const mockFn=jest.fn();
+        render(<Form addTask={mockFn}/>);
+        const inputField=screen.getByTestId("test-input");
+        fireEvent.change(inputField,{"target":{"value":"Water Plants"}});
+        const button = screen.getByRole("button");
+        fireEvent.click(button);
+        expect(mockFn).toHaveBeenCalled();
+    })
+
+    it("Should give alert when empty value is submitted",()=>{
+        const mockFn=jest.fn();
+        render(<Form addTask={mockFn}/>);
+        const alertMock=jest.spyOn(window,'alert').mockImplementation();
+        const inputField=screen.getByTestId("test-input");
+        fireEvent.change(inputField,{"target":{"value":""}});
+        const button = screen.getByRole("button");
+        fireEvent.click(button);
+        expect(alertMock).toHaveBeenCalled();
+    })
+})
+
 
 //try using mocks for addtask

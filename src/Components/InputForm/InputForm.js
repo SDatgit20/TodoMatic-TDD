@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-// import setFilter from "../App.js";
 
-function Form(props){
-    //Form({addTask})
-    const[name,setName]=useState('');
+function Form({addTask}){
+    const[taskName,setName]=useState('');
 
     function handleSubmit(e) {
         e.preventDefault();
-        props.addTask(name);
-        //addTask(name)
+        if(taskName.trim()==='')
+        window.alert("Task cannot be empty!");
+        else
+        addTask(taskName);
         setName('');
       }
     function handleChange(e){
@@ -16,14 +16,10 @@ function Form(props){
     }
     return(
         <form onSubmit={handleSubmit}>
-        <input type="text" id="todo-input" data-testid="test-input" className="input" autoComplete="off" placeholder="Enter task" value={name} onChange={handleChange}></input>
+        <input type="text" id="todo-input" data-testid="test-input" className="input" autoComplete="off" placeholder="Enter task" value={taskName} onChange={handleChange}></input>
         <button type="submit" data-testid="test-submit" className="btn btn-submit" >Add</button>
         </form>
     );
 }
 
 export default Form;
-
-//try Form onSubmit
-//add empty field check here
-//refactor the variable names as taskName

@@ -38,21 +38,15 @@ function App(props) {
   const taskList = arr.filter(FILTER_MAP[filter])
   .map((task) => (
     <TaskList name={task.name} id={task.id} key={task.id}
-     deleteTask={deleteTask} 
+    deleteTask={deleteTask} 
     completed={task.completed} 
-     toggleTaskCompletion={toggleTaskCompletion}/>
+    toggleTaskCompletion={toggleTaskCompletion}/>
   ));
 
-// let lastIndex=tasks.length>0?tasks.length:0;
   function addTask(name) {
-    // let lastIndex=tasks.length||0;
     let lastIndex=Math.random()*1000;
-    if(name.trim()==='')
-    alert("Task cannot be empty!");
-    else{
     let newTask={id:lastIndex+1, name:name, completed:false};
     setTask([...tasks,newTask]);
-    }
   }
 
   function deleteTask(id) {
