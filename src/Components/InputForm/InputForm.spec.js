@@ -1,5 +1,5 @@
 import React from "react";
-import { screen, render, getByTestId,type,fireEvent } from '@testing-library/react';
+import { screen, render, getByTestId, fireEvent } from '@testing-library/react';
 import Form from "../InputForm/InputForm.js";
 
 describe("Testing the ui",()=>{
@@ -48,6 +48,3 @@ describe("Testing the functionality",()=>{
         expect(alertMock).toHaveBeenCalled();
     })
 })
-
-
-//try using mocks for addtask

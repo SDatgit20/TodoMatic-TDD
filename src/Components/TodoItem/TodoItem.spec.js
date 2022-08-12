@@ -1,5 +1,5 @@
 import React from "react";
-import { screen, render, getByTestId,type,fireEvent } from '@testing-library/react';
+import { screen, render, getByTestId, fireEvent } from '@testing-library/react';
 import TaskList from "../TodoItem/TodoItem.js";
 
 describe("Testing the ui",()=>{
